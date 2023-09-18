@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script>
+    function check(){
+        let useridTag = document.getElementById("userid");
+        let userid = useridTag.value;
+        if(userid == ""){
+			alert("id 확인");
+			useridTag.focus();
+		}
+    }
+</script>
+<input type="text" id="userid">
+<button onclick="check()">클릭</button>
+</body>
+</html>

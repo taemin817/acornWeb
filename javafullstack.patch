@@ -1,0 +1,13 @@
+diff --git a/workspace/cafeprj/src/main/webapp/all.html b/workspace/cafeprj/src/main/webapp/all.html
+index 0806d21..0fbc2ea 100644
+--- a/workspace/cafeprj/src/main/webapp/all.html
++++ b/workspace/cafeprj/src/main/webapp/all.html
+@@ -45,8 +45,6 @@
+ <body>
+ 	<button onclick="send()">카페메뉴 조회</button>
+ 	<table id="result">  </table>
+-	<input type="text" placeholder="추가하고싶은 메뉴id 입력" id="code">
+-		<button onclick="updateOne()">전송</button>
+ 	<input type="text" placeholder="삭제하고싶은 메뉴id 입력" id="code">
+ 		<button onclick="deleteOne()">전송</button>
+ </body>

@@ -1,0 +1,40 @@
+@charset "UTF-8";
+*{
+	padding: 0px;
+	margin: 0px;
+}
+header{
+	height: 100px;
+	padding: 20px;
+	color: aqua ;
+	background-color: beige;
+	text-align: center;
+}
+
+nav{
+	padding: 10px;
+	background-color: mediumvioletred;
+}
+
+ul{
+	list-style: none;
+}
+
+ul > li{
+	display:inline-block;
+	padding-right: 20px;
+}
+section{
+	background-color: yellow;
+	height: 300px;
+	padding: 30px;
+}
+
+section ol{
+	margin-top: 50px;
+}
+
+footer{
+	padding: 20px;
+	background-color: blue;
+}

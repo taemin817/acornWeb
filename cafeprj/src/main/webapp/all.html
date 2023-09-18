@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script>
+	
+	function send(){
+		//alert("dkdkfkfjdg");		
+		// $.ajax();  (  ) 인자정보를  객체타입으로 제공함 		
+		$.ajax(  {
+			type: "get",
+			dataType: "json" ,
+			url: "/cafeprj/ajaxtotal"  ,			
+			success: function(data){
+				console.log(data);	
+				
+				for( let i=0; i< data.length ; i++){
+					let item = data[i];
+			         let str =`<tr>
+						 <td>${item.id}</td>
+						 <td>${item.name}</td>
+						 <td>${item.price}</td>
+						 </tr>`;					
+	
+					$("#result").append(str);
+				}
+			},
+			error: function(  ){		
+				 //
+				 alert("요청에 실패했습니다");
+			}
+		 }
+	   );    
+	}
+	
+	function deleteOne(){
+		let code  = document.querySelector("#code").value;
+		window.location.href="/cafeprj/delete?code=" + code ;
+	}
+</script>
+</head>
+<body>
+	<button onclick="send()">카페메뉴 조회</button>
+	<table id="result">  </table>
+	<input type="text" placeholder="삭제하고싶은 메뉴id 입력" id="code">
+		<button onclick="deleteOne()">전송</button>
+	<form name="frm" action="/cafeprj/InsertServlet.java" method="post">
+   	메뉴id<input type="text" name="menuid"><br>
+    메뉴명<input type="text" name="menuname"><br>
+    가격<input type="text" name="menuprice"><br>
+    <button>메뉴등록</button>
+</form>
+</body>
+</html>
