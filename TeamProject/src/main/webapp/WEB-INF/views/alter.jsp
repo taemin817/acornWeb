@@ -18,8 +18,8 @@
         <!-- 상품코드 입력란에 id 추가 -->
         상품코드<input type="text" name="goodsCode" id="code" readonly="readonly"><br>
         브랜드 <select name="goodsBrand">
-            <option value="0">0:삼성</option>
-            <option value="1">1:애플</option>
+            <option value="1">1:삼성</option>
+            <option value="2">2:애플</option>
         </select><br>
         상품명<input type="text" name="goodsName" id="name"><br>
         가격<input type="text" name="goodsPrice" id="price"><br>

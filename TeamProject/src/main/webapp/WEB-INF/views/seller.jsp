@@ -12,7 +12,8 @@
     <%
     ArrayList<Goods> list = (ArrayList<Goods>)request.getAttribute("list");
     %>
-    <a href = "/TeamProject/goodsRegister">등록</a>
+    <form action="/TeamProject/goodsRegister"><button>등록</button></form>
+    <form action="/TeamProject/goodsAlter"><button>수정</button></form>
     <table border="1">
         <tr>
             <th>상품 코드</th>
@@ -31,7 +32,6 @@
                 <td><%= g.getGoodsPrice() %></td>
                 <td><%= g.getGoodsStock() %></td>
                 <td>
-                <form action="/TeamProject/goodsAlter"><button>수정</button></form>
                 <a href="/TeamProject/goodsDelete?goodsCode=<%= g.getGoodsCode()%>"><button>삭제</button></a>
                 </td>
             </tr>
