@@ -2,14 +2,19 @@ package sellerDAO;
 
 public class Goods {
 	
-
+	int num;
 	String goodsCode;
 	int goodsBrand;
 	String goodsName;
 	int goodsPrice;
 	int goodsStock;
 	
-	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getGoodsCode() {
 		return goodsCode;
 	}
@@ -44,8 +49,17 @@ public class Goods {
 	
 	@Override
 	public String toString() {
-		return "member [goodsCode=" + goodsCode + ", goodsBrand=" + goodsBrand + ", goodsName=" + goodsName
+		return "member [num=" + num + ", goodsCode=" + goodsCode + ", goodsBrand=" + goodsBrand + ", goodsName=" + goodsName
 				+ ", goodsPrice=" + goodsPrice + ", goodsStock=" + goodsStock + "]";
+	}
+	public Goods(int num, String goodsCode, int goodsBrand, String goodsName, int goodsPrice, int goodsStock) {
+		super();
+		this.num = num;
+		this.goodsCode = goodsCode;
+		this.goodsBrand = goodsBrand;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.goodsStock = goodsStock;
 	}
 	public Goods(String goodsCode, int goodsBrand, String goodsName, int goodsPrice, int goodsStock) {
 		super();

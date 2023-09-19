@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class goodsDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:ptm";
+	String url = "jdbc:oracle:thin:@localhost:1521:testdb";
 	String user = "scott";
 	String password = "tiger";
 
@@ -169,7 +169,7 @@ public class goodsDAO {
 		PreparedStatement pst = null;
 		try {
 			pst = con.prepareStatement(sql);
-			pst.setString(1, goodsCode); // 물음표 개수만큼 채워서 sql 완성함
+			pst.setString(1, goodsCode);
 			pst.executeUpdate();
 
 		} catch (SQLException e) {
@@ -208,13 +208,17 @@ public class goodsDAO {
 
 		startPage = (page - 1) * pageSize + 1;
 		endPage = page * pageSize;
+		
+		System.out.println("start page " + startPage);
+		System.out.println("end page " + endPage);
 
-		ArrayList<Goods> list = new ArrayList<>();
 		Connection con = dbcon();
-		String sql = "select * from( select rownum num, goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock from goodsTbl) where num between ? and ? and ? and ? and ? and ?";
+		String sql = "select * from( select rownum num, goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock from goodsTbl) where num between ? and ?";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
+		ArrayList<Goods> list = new ArrayList<>();
+		
 		try {
 			pst = con.prepareStatement(sql);
 			pst.setInt(1, startPage);
@@ -222,12 +226,13 @@ public class goodsDAO {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				String code = rs.getString(1);
-				int brand = rs.getInt(2);
-				String name = rs.getString(3);
-				int price = rs.getInt(4);
-				int stock = rs.getInt(5);
-				Goods g = new Goods(code, brand, name, price, stock);
+				int num = rs.getInt(1);
+				String code = rs.getString(2);
+				int brand = rs.getInt(3);
+				String name = rs.getString(4);
+				int price = rs.getInt(5);
+				int stock = rs.getInt(6);
+				Goods g = new Goods(num, code, brand, name, price, stock);
 				list.add(g);
 			}
 		} catch (SQLException e) {
@@ -250,10 +255,11 @@ public class goodsDAO {
 
 	public static void main(String[] args) {
 		goodsDAO dao = new goodsDAO();
-		ArrayList<Goods> list = dao.selectAll();
+		ArrayList<Goods> list = dao.getListPage(1, 4);
 		for (Goods goods : list) {
 			System.out.println(goods);
 		}
+		
 
 	}
 

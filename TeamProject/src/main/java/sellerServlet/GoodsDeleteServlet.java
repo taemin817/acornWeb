@@ -20,7 +20,7 @@ public class GoodsDeleteServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         
 		String goodsCode = req.getParameter("goodsCode");
-        
+        System.out.println(goodsCode);
 		sellerService s = new sellerService();
 		
 		s.deleteGoods(goodsCode);

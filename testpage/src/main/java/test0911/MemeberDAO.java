@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import sellerDAO.Goods;
+
 public class MemeberDAO {
 	String driver="oracle.jdbc.driver.OracleDriver";
 	String url="jdbc:oracle:thin:@localhost:1521:xe";
@@ -108,6 +110,42 @@ public class MemeberDAO {
 			close(rs, pst, con);
 			return list;
 	}
+	
+	
+	// 전체 조회 메서드
+		public ArrayList<Goods> selectAll() {
+			// db 연결
+			Connection con = dbcon();
+
+			// sql 작성
+			String sql = "select * from goodsTbl order by goodsCode";
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+
+			ArrayList<Goods> goodsList = new ArrayList<>();
+
+			// 실행
+			try {
+				pst = con.prepareStatement(sql);
+				rs = pst.executeQuery();
+				while (rs.next()) {
+
+					String code = rs.getString(1);
+					int brand = rs.getInt(2);
+					String name = rs.getString(3);
+					int price = rs.getInt(4);
+					int stock = rs.getInt(5);
+
+					Goods g = new Goods(code, brand, name, price, stock);
+					goodsList.add(g);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			// 해제
+			close(rs, pst, con);
+			return goodsList;
+		}
 	
 	public void close( AutoCloseable ...a) {
 		for( AutoCloseable  item : a) {
