@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class goodsDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
-	String url = "jdbc:oracle:thin:@localhost:1521:testdb";
+	String url = "jdbc:oracle:thin:@localhost:1521:ptm";
 	String user = "scott";
 	String password = "tiger";
 
@@ -213,7 +213,7 @@ public class goodsDAO {
 		System.out.println("end page " + endPage);
 
 		Connection con = dbcon();
-		String sql = "select * from( select rownum num, goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock from goodsTbl) where num between ? and ?";
+		String sql = "select * from( select rownum num, goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock from goodsTbl order by goodsCode) where num between ? and ?";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 

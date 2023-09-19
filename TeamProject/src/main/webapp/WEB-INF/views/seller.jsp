@@ -17,6 +17,7 @@
     
     <form action="/TeamProject/goodsRegister"><button>등록</button></form>
     <form action="/TeamProject/goodsAlter"><button>수정</button></form>
+    <h1>판매자 메인 페이지</h1>
     <table border="1">
         <tr>
         	<th>번호</th>
