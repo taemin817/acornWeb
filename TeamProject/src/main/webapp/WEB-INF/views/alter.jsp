@@ -14,12 +14,15 @@
     </style>
 </head>
 <body>
+
+    <form action="/TeamProject/seller"><button>판매자페이지로</button></form>
+    <form action="/TeamProject/goodsRegister"><button>등록 페이지로</button></form>
     <form action="/TeamProject/goodsAlter" method="post">
         <!-- 상품코드 입력란에 id 추가 -->
         상품코드<input type="text" name="goodsCode" id="code" readonly="readonly"><br>
         브랜드 <select name="goodsBrand">
-            <option value="1">1:삼성</option>
-            <option value="2">2:애플</option>
+            <option value="0">0:삼성</option>
+            <option value="1">1:애플</option>
         </select><br>
         상품명<input type="text" name="goodsName" id="name"><br>
         가격<input type="text" name="goodsPrice" id="price"><br>
@@ -27,7 +30,7 @@
         <button>변경</button>
     </form>
     
-    <!-- JavaScript를 사용하여 클릭 시 데이터 자동 입력 -->
+    <!-- 클릭 시 데이터 자동 입력 -->
     <script>
         // 클릭 이벤트를 처리할 JavaScript 함수
         function fillData(code, name, price, stock) {

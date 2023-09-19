@@ -31,7 +31,8 @@ public class GoodsRegisterServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		resp.setContentType("text/html;charset=UTF-8");
-		
+        req.setCharacterEncoding("UTF-8");
+        
 		String goodsCode = req.getParameter("goodsCode");
         int goodsBrand = Integer.parseInt(req.getParameter("goodsBrand"));
         String goodsName = req.getParameter("goodsName");
@@ -42,7 +43,7 @@ public class GoodsRegisterServlet extends HttpServlet{
 		
 		s.RegisterGoods(new Goods(goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock));
 		
-		resp.sendRedirect("/TeamProject/seller");
+		resp.sendRedirect("/TeamProject/goodsRegister");
 	}
 
 }

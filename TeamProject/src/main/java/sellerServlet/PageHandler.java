@@ -1,4 +1,4 @@
-package test0911;
+package sellerServlet;
 
 public class PageHandler {
 	// 받아오는 값

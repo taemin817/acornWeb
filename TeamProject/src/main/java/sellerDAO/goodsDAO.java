@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 public class goodsDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:ptm";
@@ -72,7 +73,7 @@ public class goodsDAO {
 		Connection con = dbcon();
 
 		// sql 작성
-		String sql = "select * from goodsTbl";
+		String sql = "select * from goodsTbl order by goodsCode";
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 
@@ -178,28 +179,64 @@ public class goodsDAO {
 		close(pst, con);
 	}
 
+	// 페이징을 위한 준비
 	public int getTotalCnt() {
 		Connection con = dbcon();
 		String sql = "select count(*) from goodsTbl";
-		ResultSet rs=null;
-		PreparedStatement pst=null;
-		
-		int totalCnt=0;
+		ResultSet rs = null;
+		PreparedStatement pst = null;
+
+		int totalCnt = 0;
 		try {
 			pst = con.prepareStatement(sql);
 			rs = pst.executeQuery();
-			
-			if(rs.next()) {
+
+			if (rs.next()) {
 				// 1열의 갯수
 				totalCnt = rs.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		close(rs, pst, con);
 		return totalCnt;
 	}
-	
+
+	// 현재 페이지, 페이지에 나타낼 목록의 갯수
+	public ArrayList<Goods> getListPage(int page, int pageSize) {
+		int startPage, endPage = 0;
+
+		startPage = (page - 1) * pageSize + 1;
+		endPage = page * pageSize;
+
+		ArrayList<Goods> list = new ArrayList<>();
+		Connection con = dbcon();
+		String sql = "select * from( select rownum num, goodsCode, goodsBrand, goodsName, goodsPrice, goodsStock from goodsTbl) where num between ? and ? and ? and ? and ? and ?";
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		try {
+			pst = con.prepareStatement(sql);
+			pst.setInt(1, startPage);
+			pst.setInt(2, endPage);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				String code = rs.getString(1);
+				int brand = rs.getInt(2);
+				String name = rs.getString(3);
+				int price = rs.getInt(4);
+				int stock = rs.getInt(5);
+				Goods g = new Goods(code, brand, name, price, stock);
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		close(rs, pst, con);
+		return list;
+	}
+
 	public void close(AutoCloseable... a) {
 		for (AutoCloseable item : a) {
 			try {
